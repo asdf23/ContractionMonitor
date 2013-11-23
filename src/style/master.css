@@ -1,0 +1,201 @@
+.rectBackground {
+	fill: #0000FF;
+	fill-rule:evenodd;
+	stroke:none;
+	display:inline;
+}
+.rectBackgroundBlack {
+	fill: #000000;
+	fill-rule:evenodd;
+	stroke:none;
+	display:inline;
+}
+.headerButton {
+	/*fill:#0000aa;*/
+	fill-rule:evenodd;
+	stroke:#000000;
+	stroke-width:2px;
+	stroke-linecap:butt;
+	stroke-linejoin:miter;
+	stroke-opacity:1
+	fill:url(#linearGradientButtonFade); /* <-- doesn't work */
+}
+.active {
+	fill:#0000ff;
+}
+.headerButtonText {
+	font-size:150%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:100%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ffffff;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.headerButtonIcon {
+	fill:#00b2ff;
+	fill-opacity:1;
+}
+.headerButtonIconText {
+	fill:#0000ff;
+	font-size:100%;
+	font-style: normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	text-anchor: middle;
+}
+#textButtonIconInfo {
+	font-style: italic;
+	/*dominant-baseline: hanging;*/
+	font-family:Century Schoolbook L;
+	-inkscape-font-specification:Century Schoolbook L Italic;
+}
+.rectControlCenter {
+	fill:#000000;
+	fill-opacity:1;
+	stroke:none;
+}
+.textTimerHeader {
+	font-size:130%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#808080;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.textTimerSubHeader {
+	font-size:100%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#808080;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.textTimerAltHeader {
+	font-size:140%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ffffff;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.textTimerAltSubHeader {
+	font-size:75%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#808080;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.timerTimerDisplay {
+	font-size:125%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ff00ff;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.hr {
+	fill:url(#radialGradient4127);
+	fill-opacity:1;
+	stroke:none;
+}
+.textTimerStart {
+	font-size:100%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#00a980;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.textTimerEnd {
+	font-size:100%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ff8080;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.rectHeaderBackground {
+	fill:#444444;
+	fill-opacity:1;
+	stroke:#000000;
+	stroke-width:1px;
+	stroke-linecap:butt;
+	stroke-linejoin:miter;
+	stroke-opacity:1;
+}
+.buttonBackground {
+	fill:none;
+	stroke:url(#radialGradientButtonOutline);
+	stroke-width:25;
+	stroke-miterlimit:4;
+	stroke-dasharray:none;
+}
+.startButton {
+	fill:#ff00ff;
+	fill-opacity:1;
+	stroke:url(#linearGradientButton);
+	stroke-width:4.59393644;
+	stroke-miterlimit:4;
+	stroke-dasharray:none;
+}
+.textStartButton {
+	font-size:300%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ffffff;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.historyItem {
+	border-bottom: 1px solid white;
+	color: white;
+	font-family: monospace;
+}

@@ -1,0 +1,21 @@
+{ 
+	 "name": "Contraction Monitor"
+	,"description": "This app records contractions and tells you when to go to the hospital"
+	,"launch_path": "/index.svg"
+	,"developer": { 
+		 "name": "Andrew Mainland"
+		,"url": "http://xxxxxxxxxx" 
+	}
+	,"icons": { 
+		 "16":  "/images/icon16.png"
+		,"32":  "/imgages/icon32.png"
+		,"48":  "/imgages/icon48.png"
+		,"64":  "/imgages/icon64.png"
+		,"128": "/imgages/icon128.png" 
+	}
+	,"default_locale": "en" 
+	,"permissions": {
+		"systemXHR": {}
+	}
+	,"type": "privileged"
+}

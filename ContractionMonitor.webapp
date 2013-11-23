@@ -1,0 +1,11 @@
+{ 
+	 "name": "Contraction Monitor"
+	,"description": "This app records contractions and tells you when to go to the hospital"
+	,"type": "privileged"
+	,"package_path" : "ContractionMonitor/contractionMonitor.zip"
+	,"version": "1"
+	,"developer": { 
+		 "name": "Andrew Mainland"
+		,"url": "http://xxxxxxxx" 
+	}
+}

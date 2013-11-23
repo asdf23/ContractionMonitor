@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="style/master.css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:cc="http://creativecommons.org/ns#"
+	 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:xhtml="http://www.w3.org/1999/xhtml"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+	 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+	 width="100%"
+	 height="100%"
+	 id="svg2"
+	 version="1.1"
+	 inkscape:version="0.48.4 r9939"
+	 sodipodi:docname="index.svg"
+	 onload="init(this)">
+	<svg:script xlink:href="scripts/master.js" />
+	<defs
+		 id="defs4">
+		<linearGradient
+			 id="linearGradient4358">
+			<stop
+				 style="stop-color:#000000;stop-opacity:1;"
+				 offset="0"
+				 id="stop4360" />
+			<stop
+				 style="stop-color:#ffffff;stop-opacity:0;"
+				 offset="1"
+				 id="stop4362" />
+		</linearGradient>
+		<linearGradient
+			 id="linearGradient4330">
+			<stop
+				 style="stop-color:#0000ff;stop-opacity:1;"
+				 offset="0"
+				 id="stop4332" />
+			<stop
+				 style="stop-color:#00ebff;stop-opacity:0.49107143;"
+				 offset="1"
+				 id="stop4334" />
+		</linearGradient>
+		<linearGradient
+			 id="linearGradient4119">
+			<stop
+				 style="stop-color:#ffffff;stop-opacity:1;"
+				 offset="0"
+				 id="stop4121" />
+			<stop
+				 style="stop-color:#000000;stop-opacity:0;"
+				 offset="1"
+				 id="stop4123" />
+		</linearGradient>
+		<linearGradient
+			 id="linearGradient4120">
+			<stop
+				 style="stop-color:#ffffff;stop-opacity:1;"
+				 offset="0"
+				 id="stop41212" />
+			<stop
+				 style="stop-color:#000000;stop-opacity:0;"
+				 offset="1"
+				 id="stop41232" />
+		</linearGradient>
+		<radialGradient
+			 inkscape:collect="always"
+			 xlink:href="#linearGradient4119"
+			 id="radialGradient4127"
+			 cx="76.266518"
+			 cy="313.43561"
+			 fx="76.266518"
+			 fy="313.43561"
+			 r="138.89598"
+			 gradientTransform="matrix(1.5224914,0,0,0.06301386,227.83548,288.24257)"
+			 gradientUnits="userSpaceOnUse" />
+		<radialGradient
+			 id="radialGradientWhiteToBlack">
+			 <stop offset="0%" stop-color="white" stop-opacity="1"/>
+			 <stop offset="100%" stop-color="black" stop-opacity="0"/>
+		</radialGradient>
+		<radialGradient
+			 id="radialGradientButtonOutline">
+			 <stop offset="95%" stop-color="#555555" opacity=".6"/>
+			 <stop offset="100%" stop-color="#AAAAAA" stop-opacity="0.4"/>
+		</radialGradient>
+		<radialGradient
+			 id="radialGradientSunSpotTopRight"
+			 cx="50%"
+			 cy="50%"
+			 fx="100%"
+			 fy="0%"
+			 r="100%"
+			 xlink:href="#linearGradientSunSpotTopRight" >
+		</radialGradient>
+		<linearGradient
+			 id="linearGradientSunSpotTopRight"
+			 x1="100%"
+			 y1="0%"
+			 x2="0%"
+			 y2="50%" >
+			<stop offset="20%" stop-color="#333333" stop-opacity="1" />
+			<stop offset="100%" stop-color="#000000" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient
+			 id="linearGradientButtonFade"
+			 x1="50%"
+			 y1="0%"
+			 x2="50%"
+			 y2="50%" >
+			<stop offset="0%" stop-color="#000077" stop-opacity="1" />
+			<stop offset="100%" stop-color="#0000FF" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient
+			 id="linearGradientButtonFadeActive"
+			 x1="25%"
+			 y1="0%"
+			 x2="50%"
+			 y2="50%" >
+			<stop offset="0%" stop-color="#EEEEFF" stop-opacity="1" />
+			<stop offset="100%" stop-color="#0000FF" stop-opacity="1" />
+		</linearGradient>
+		<radialGradient
+			 inkscape:collect="always"
+			 xlink:href="#linearGradient4330"
+			 id="radialGradient4346"
+			 cx="113.14227"
+			 cy="511.85977"
+			 fx="113.14227"
+			 fy="511.85977"
+			 r="117.85714"
+			 gradientTransform="matrix(0.35897095,-0.36124856,0.8065693,0.801484,-341.32232,102.27289)"
+			 gradientUnits="userSpaceOnUse" />
+		<linearGradient
+			 inkscape:collect="always"
+			 xlink:href="#linearGradient4358"
+			 id="linearGradient4364"
+			 x1="180.75964"
+			 y1="710.95972"
+			 x2="269.53516"
+			 y2="541.3252"
+			 gradientUnits="userSpaceOnUse" />
+		<linearGradient
+			 id="linearGradientButton"
+			 x1="25%"
+			 y1="100%"
+			 x2="75%"
+			 y2="50%" >
+			<stop
+				 style="stop-color:#000000;stop-opacity:1;"
+				 offset="0" />
+			<stop
+				 style="stop-color:#ffffff;stop-opacity:0.5;"
+				 offset="1" />
+		</linearGradient>
+	</defs>
+	<sodipodi:namedview
+		 id="base"
+		 pagecolor="#ffffff"
+		 bordercolor="#666666"
+		 borderopacity="1.0"
+		 inkscape:pageopacity="0.0"
+		 inkscape:pageshadow="2"
+		 inkscape:zoom="0.7"
+		 inkscape:cx="216.70318"
+		 inkscape:cy="673.0048"
+		 inkscape:document-units="px"
+		 inkscape:current-layer="layer2"
+		 showgrid="false"
+		 showguides="true"
+		 inkscape:guide-bbox="true"
+		 inkscape:window-width="1280"
+		 inkscape:window-height="1005"
+		 inkscape:window-x="2560"
+		 inkscape:window-y="0"
+		 inkscape:window-maximized="1" />
+	<metadata
+		 id="metadata7">
+		<rdf:RDF>
+			<cc:Work
+				 rdf:about="">
+				<dc:format>image/svg+xml</dc:format>
+				<dc:type
+					 rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+				<dc:title></dc:title>
+			</cc:Work>
+		</rdf:RDF>
+	</metadata>
+	<g
+		 inkscape:groupmode="layer"
+		 id="buttons"
+		 inkscape:label="buttons"
+		 style="display:inline">
+		<g
+			 id="timerButton">
+			<rect
+				 id="rectButtonTimer"
+				 class="active headerButton"
+				 style="fill:url(#linearGradientButtonFadeActive)"
+				 y="3%"
+				 x="0%"
+				 width="32%"
+				 height="20%"
+				 ry="20"
+				 rx="20" />
+			<text
+				 id="textButtonTimer"
+				 class="headerButtonText"
+				 x="16%"
+				 y="14%"
+				 textLength="7%"
+				 lengthAdjust="spacingAndGlyphs"><tspan
+						 x="16%"
+						 y="14%">Timer</tspan></text>
+			<circle
+				 class="headerButtonIcon"
+				 cx="16%"
+				 cy="7.8%"
+				 r="1.8%" />
+			<text
+				 id="textButtonIconTimer"
+				 class="headerButtonIconText"
+				 x="16%"
+				 y="9%" ><tspan
+						 x="16%"
+						 y="9%">⏱</tspan></text>
+		</g>
+		<g
+			 id="historyButton">
+			<rect
+				 id="rectButtonHistory"
+				 class="headerButton"
+				 style="fill:url(#linearGradientButtonFade)"
+				 y="3%"
+				 x="34%"
+				 width="32%"
+				 height="20%"
+				 ry="20"
+				 rx="20" />
+			<text
+				 id="textButtonHistory"
+				 class="headerButtonText"
+				 x="50%"
+				 y="14%"
+				 textHeight="10%"
+				 textLength="12%"
+				 lengthAdjust="spacingAndGlyphs"><tspan
+						 x="50%"
+						 y="14%">History</tspan></text>
+			<circle
+				 class="headerButtonIcon"
+				 cx="50%"
+				 cy="7.8%"
+				 r="1.8%" />
+			<text
+				 id="textButtonIconHistory"
+				 class="headerButtonIconText"
+				 x="50%"
+				 y="9%" ><tspan
+						 x="50%"
+						 y="9%">⌚</tspan></text>
+		</g>
+		<g
+			 id="infoButton">
+			<rect
+				 id="rectButtonInfo"
+				 class="headerButton"
+				 style="fill:url(#linearGradientButtonFade)"
+				 y="3%"
+				 x="68%"
+				 width="32%"
+				 height="20%"
+				 ry="20"
+				 rx="20" />
+			<text
+				 id="textButtonInfo"
+				 class="headerButtonText"
+				 x="84%"
+				 y="14%"
+				 textLength="8%"
+				 lengthAdjust="spacingAndGlyphs" ><tspan
+						 x="84%"
+						 y="14%">Info</tspan></text>
+			<circle
+				 class="headerButtonIcon"
+				 cx="83.8%"
+				 cy="7.8%"
+				 r="1.8%" />
+			<text
+				 id="textButtonIconInfo"
+				 class="headerButtonIconText"
+				 x="84%"
+				 y="9%" ><tspan
+						 x="84%"
+						 y="9%">i</tspan></text>
+		</g>
+		<!-- wraped text example 
+		<foreignObject
+			 x="84%"
+			 y="6.5%"
+			 width="4%"
+			 height="8%"
+			 transform="translate(0,0)">
+				<xhtml:div style="display: table; overflow: hidden; height: 150px;">  
+					<xhtml:div style="display: table-cell; vertical-align: middle;">
+						<xhtml:div style="color:white; font-family:Schoolbook L; text-align:center;">SVG Text</xhtml:div>
+					</xhtml:div>
+				</xhtml:div>
+			</foreignObject>
+		-->
+		<foreignObject
+			 id="promptStrength"
+			 display="none"
+			 x="0%"
+			 y="0%"
+			 width="100%"
+			 height="10%"
+			 transform="translate(0,0)">
+				<xhtml:select>
+					<xhtml:option value="mild">Mild</xhtml:option>
+					<xhtml:option value="regular">Regular</xhtml:option>
+					<xhtml:option value="strong">Strong</xhtml:option>
+					<xhtml:option value="reset">Reset (false alarm)</xhtml:option>
+					<xhtml:option value="exit">Cancel (more contrat.)</xhtml:option>
+				</xhtml:select>
+			</foreignObject>
+	</g>
+	<g
+		 id="timer">
+		<rect
+			 class="rectBackground"
+			 width="100%"
+			 height="85%"
+			 x="0%"
+			 y="15%"
+			 ry="0"
+			 rx="0" />
+		<rect
+			 class="rectControlCenter"
+			 style="fill:url(#radialGradientSunSpotTopRight)"
+			 width="90%"
+			 height="40%"
+			 x="5%"
+			 y="16%"
+			 ry="30"
+			 rx="30" />
+		<text
+			 id="textTimerDurationHeader"
+			 class="textTimerHeader"
+			 x="28%"
+			 y="20%"
+			 textLength="25%"
+			 lengthAdjust="spacingAndGlyphs"><tspan
+					 x="28%"
+					 y="20%">Duration</tspan></text>
+		<text
+			 id="textTimerFrequencyHeader"
+			 class="textTimerHeader"
+			 x="72%"
+			 y="20%"
+			 textLength="25%"
+			 lengthAdjust="spacingAndGlyphs"><tspan
+					 x="72%"
+					 y="20%">Frequency</tspan></text>
+		<text
+			 id="timerDurationDisplay"
+			 class="timerTimerDisplay"
+			 x="28%"
+			 y="25%"
+			 textLength="25%"
+			 lengthAdjust="spacingAndGlyphs"><tspan
+					 x="28%"
+					 y="25%">00:00:00</tspan></text>
+		<text
+			 id="timerFrequencyDisplay"
+			 class="timerTimerDisplay"
+			 x="72%"
+			 y="25%"
+			 textLength="25%"
+			 lengthAdjust="spacingAndGlyphs"><tspan
+					 x="72%"
+					 y="25%">00:00:00</tspan></text>
+		<text
+			 id="timerDurationInfo"
+			 class="textTimerSubHeader"
+			 x="28%"
+			 y="27.3%"
+			 textLength="25%"
+			 lengthAdjust="spacing"><tspan
+					 x="28%"
+					 y="27.3%">hrs min sec</tspan></text>
+		<text
+			 id="timerFrequencyInfo"
+			 class="textTimerSubHeader"
+			 x="72%"
+			 y="27.3%"
+			 textLength="25%"
+			 lengthAdjust="spacing"><tspan
+					 x="72%"
+					 y="27.3%">hrs min sec</tspan></text>
+		<rect
+			 id="rectTimerHR"
+			 class="hr"
+			 style="fill:url(#radialGradientWhiteToBlack);fill-opacity:1;stroke:none"
+			 x="20%"
+			 y="29%"
+			 width="60%"
+			 height="1%"/>
+		<text
+			 id="timerStartHeader"
+			 class="textTimerSubHeader"
+			 x="28%"
+			 y="34%"
+			 textLength="10%"
+			 lengthAdjust="spacing"><tspan
+					 x="28%"
+					 y="34%">Start</tspan></text>
+		<text
+			 id="timerStartHeader"
+			 class="textTimerSubHeader"
+			 x="72%"
+			 y="34%"
+			 textLength="6%"
+			 lengthAdjust="spacing"><tspan
+					 x="72%"
+					 y="34%">End</tspan></text>
+		<text
+			 id="timerStart"
+			 class="textTimerStart"
+			 x="28%"
+			 y="37%"
+			 textLength="15%"
+			 lengthAdjust="spacing"><tspan
+					 x="28%"
+					 y="37%">10:24 AM</tspan></text>
+		<text
+			 id="timerEnd"
+			 class="textTimerEnd"
+			 x="72%"
+			 y="37%"
+			 textLength="15%"
+			 lengthAdjust="spacing"><tspan
+					 x="72%"
+					 y="37%">10:24 AM</tspan></text>
+		<text
+			 id="timerStartDate"
+			 class="textTimerSubHeader"
+			 x="28%"
+			 y="40%"
+			 textLength="15%"
+			 lengthAdjust="spacing"><tspan
+					 x="28%"
+					 y="40%">12/06/2011</tspan></text>
+		<text
+			 id="timerEndDate"
+			 class="textTimerSubHeader"
+			 x="72%"
+			 y="40%"
+			 textLength="15%"
+			 lengthAdjust="spacing"><tspan
+					 x="72%"
+					 y="40%">12/06/2011</tspan></text>
+		<rect
+			class="rectHeaderBackground"
+			x="10%"
+			y="43%"
+			width="80%"
+			height="10%"
+			rx="50"
+			ry="50" />
+		<text
+			 id="timerAverage"
+			 class="textTimerAltHeader"
+			 x="50%"
+			 y="47%"
+			 textLength="20%"
+			 lengthAdjust="spacing"><tspan
+					 x="50%"
+					 y="47%">Average</tspan></text>
+		<text
+			 id="timerAverageDuration"
+			 class="textTimerAltSubHeader"
+			 x="28%"
+			 y="50%"
+			 textLength="23%"
+			 lengthAdjust="spacing"><tspan
+					 x="28%"
+					 y="50%">Dur: 42s</tspan></text>
+		<text
+			 id="timerAverageFrequency"
+			 class="textTimerAltSubHeader"
+			 x="72%"
+			 y="50%"
+			 textLength="23%"
+			 lengthAdjust="spacing"><tspan
+					 x="72%"
+					 y="50%">Freq: 2m 12s</tspan></text>
+		<circle
+			id="timerStartBackground"
+			style="stroke:url(#radialGradientButtonOutline)"
+			class="buttonBackground"
+			cx="50%"
+			cy="78%"
+			r="25%"
+		/>
+		<circle
+			id="timerStartButton"
+			style="stroke:url(#linearGradientButton)"
+			class="startButton"
+			cx="50%"
+			cy="78%"
+			r="25%"
+		/>
+		<text
+			 id="textStart"
+			 class="textStartButton"
+			 x="50%"
+			 y="79%"
+			 textLength="23%"
+			 lengthAdjust="spacing"><tspan
+					 x="50%"
+					 y="79%">Start</tspan></text>
+	</g>
+	<g
+		 id="history"
+		 display="none">
+		<rect
+			 class="rectBackgroundBlack"
+			 width="100%"
+			 height="85%"
+			 x="0%"
+			 y="15%"
+			 ry="0"
+			 rx="0" />
+		<foreignObject
+			 id="historyContainer"
+			 x="0%"
+			 y="15%"
+			 width="100%"
+			 height="85%">
+				<xhtml:div style="overflow: scroll; height: 100%;">
+
+				</xhtml:div>
+			</foreignObject>
+	</g>
+	<g
+		 id="info"
+		 display="none">
+		<rect
+			 class="rectBackground"
+			 width="100%"
+			 height="85%"
+			 x="0%"
+			 y="15%"
+			 ry="0"
+			 rx="0" />
+	</g>
+</svg>

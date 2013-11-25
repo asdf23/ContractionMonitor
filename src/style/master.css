@@ -101,13 +101,13 @@
 	text-anchor: middle;
 }
 .textTimerAltSubHeader {
-	font-size:75%;
+	font-size:90%;
 	font-style:normal;
 	font-weight:normal;
 	line-height:125%;
 	letter-spacing:0px;
 	word-spacing:0px;
-	fill:#808080;
+	fill:#FFFFFF;
 	fill-opacity:1;
 	stroke:none;
 	font-family:Sans;
@@ -158,7 +158,7 @@
 	text-anchor: middle;
 }
 .rectHeaderBackground {
-	fill:#444444;
+	fill:#4444FF;
 	fill-opacity:1;
 	stroke:#000000;
 	stroke-width:1px;

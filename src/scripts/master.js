@@ -27,6 +27,7 @@ var rectButtonTimer;
 var rectButtonHistory;
 var rectButtonInfo;
 var historyContainer;
+var infoResetButton;
 
 //Variables
 var programState;
@@ -65,7 +66,8 @@ function init(svgElem) {
 	rectButtonTimer = document.getElementById("rectButtonTimer");
 	rectButtonHistory = document.getElementById("rectButtonHistory");
 	rectButtonInfo = document.getElementById("rectButtonInfo");
-	historyContainer =  document.getElementById("historyContainer").children[0];
+	historyContainer = document.getElementById("historyContainer").children[0];
+	infoResetButton = document.getElementById("infoResetButton");
 	//Setup NoAction mode
 	programState = ProgramState.NoAction;
 	updateText(averageDuration, "");
@@ -79,6 +81,7 @@ function init(svgElem) {
 	tabTimer.onclick = selectTimerTab;
 	tabHistory.onclick = selectHistoryTab;
 	tabInfo.onclick = selectInfoTab;
+	infoResetButton.onclick = resetHistory;
 	//Init database
 	if(localStorage["contractionHistory"] == null) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
@@ -117,9 +120,25 @@ function moveText(id, x, y ) {
 	}
 }
 function updateStartTimeWithDateTime() {
+	db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+	db = db.sort(sortContractions);
+	var lastFrequencyText = "";
+	var lastContractionEndedTimeText = "";
+	var lastContractionEndedDateText = "";
+	if(db.length >= 2) {
+		lastFrequencyText = millisecondsToDurationString( db[0].Start.getTime() - db[1].Start.getTime() );
+	}
+	if(db.length >= 1) {
+		var lastContractionEnded = new Date(db[0].Start.getTime() + db[0].Duration);
+		lastContractionEndedTimeText = dateToTimeString(lastContractionEnded);
+		lastContractionEndedDateText = dateToDateString(lastContractionEnded);
+	}
 	updateText(duration, "00:00:00");
+	updateText(frequency, lastFrequencyText);
 	updateText(startDurationDate, dateToDateString(new Date()));
 	updateText(startDurationTime, dateToTimeString(new Date()));
+	updateText(endDurationTime, lastContractionEndedTimeText);
+	updateText(endDurationDate, lastContractionEndedDateText);
 	clearInterval(ptrStartTimerAsClock);
 	ptrStartTimerAsClock = setInterval(function() {
 		updateText(startDurationDate, dateToDateString(new Date()));
@@ -174,6 +193,12 @@ function selectStrengthBlur() {
 			break;
 	}
 }
+function resetHistory() {
+	if(confirm("Erase contraction history.\nAre you sure?")) {
+		localStorage["contractionHistory"] = JSON.stringify([]);
+		updateHistory();
+	}
+}
 function StopClock(stopType){
 	clearInterval(ptrStartTimerAsClock);
 	//if not cancelled...
@@ -193,22 +218,28 @@ function storeContraction(start, end, strength) {
 function updateHistory() {
 	db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
 	db = db.sort(sortContractions);
+	var oldDiv = historyContainer.getElementsByTagName("div");
+	while((oldDiv != undefined) && (oldDiv.length && oldDiv.length > 0)) {
+		oldDiv[0].parentNode.removeChild(oldDiv[0]);
+		oldDiv = historyContainer.getElementsByTagName("div");
+	}
 	var totalDuration = 0;
+	var totalFrequency = 0;
 	if(db.length >= 2) {
 		var freqText = getDuration(db[db.length - 1].Start, db[db.length - 2].Start);
 		updateText(frequency, freqText);
-		var oldDiv = historyContainer.getElementsByTagName("div");
-		while((oldDiv != undefined) && (oldDiv.length && oldDiv.length > 0)) {
-			oldDiv[0].parentNode.removeChild(oldDiv[0]);
-			oldDiv = historyContainer.getElementsByTagName("div");
-		}
 		for(var i=0; i<db.length; i++) {
 			totalDuration += db[i].Duration;
+			if( (i+1) < db.length ) {
+				totalFrequency += db[i].Start.getTime() - db[i+1].Start.getTime();
+			}
 			var div = contractionEventToHTML(db[i], ((i+1) < db.length) ? db[i+1].Start : null);
 			historyContainer.appendChild(div);
 		}
 		var avgDurationText = millisecondsToDurationString(totalDuration / db.length);
+		var averageFrequencyText = millisecondsToDurationString(totalFrequency / db.length);
 		updateText(averageDuration, "Dur: " + avgDurationText);
+		updateText(averageFrequency, "Freq: " + averageFrequencyText);
 	}
 }
 function sortContractions(a,b) {
@@ -289,10 +320,10 @@ function updateText(elem, newText) {
 		if((elem.childNodes.length == 1) && (elem.childNodes[0].nodeType == 3)) {
 			elem.childNodes[0].nodeValue = newText;
 		} else {
-			console.warn("updateText: failed to update tspan");
+			console.log("!! updateText: failed to update tspan");
 		}
 	} else {
-		console.warn("updateText: failed to find inner most tspan");
+		console.log("!! updateText: failed to find inner most tspan");
 	}
 }
 function dateTimeReviver(key, value) {

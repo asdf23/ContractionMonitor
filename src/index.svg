@@ -21,6 +21,337 @@
 	<svg:script xlink:href="scripts/master.js" />
 	<defs
 		 id="defs4">
+		<!-- good looking button attempt -->
+		<filter
+			 x="-0.25"
+			 y="-0.25"
+			 width="1.5"
+			 height="1.5"
+			 color-interpolation-filters="sRGB"
+			 id="filter3961">
+			<feGaussianBlur
+				 result="result1"
+				 stdDeviation="3"
+				 id="feGaussianBlur3963" />
+			<feComposite
+				 in2="result1"
+				 operator="in"
+				 in="result1"
+				 result="result4"
+				 id="feComposite3965" />
+			<feGaussianBlur
+				 in="result4"
+				 result="result6"
+				 stdDeviation="1"
+				 id="feGaussianBlur3967" />
+			<feComposite
+				 in2="result4"
+				 operator="xor"
+				 in="result6"
+				 result="result8"
+				 id="feComposite3969" />
+			<feComposite
+				 in2="result8"
+				 operator="atop"
+				 in="result4"
+				 result="fbSourceGraphic"
+				 id="feComposite3971" />
+			<feSpecularLighting
+				 in="fbSourceGraphic"
+				 result="result1"
+				 lighting-color="#ffffff"
+				 surfaceScale="3"
+				 specularConstant="1.29999995"
+				 specularExponent="10"
+				 id="feSpecularLighting3973">
+				<feDistantLight
+					 elevation="55"
+					 azimuth="235"
+					 id="feDistantLight3975" />
+			</feSpecularLighting>
+			<feComposite
+				 in2="fbSourceGraphic"
+				 operator="atop"
+				 in="result1"
+				 result="result2"
+				 id="feComposite3977" />
+			<feComposite
+				 in2="result2"
+				 operator="arithmetic"
+				 k1="0"
+				 k2="1"
+				 k3="1"
+				 k4="0"
+				 in="fbSourceGraphic"
+				 result="result4"
+				 id="feComposite3979" />
+			<feComposite
+				 in2="SourceGraphic"
+				 operator="over"
+				 in="result4"
+				 result="result9"
+				 id="feComposite3981" />
+			<feBlend
+				 in2="result2"
+				 mode="multiply"
+				 id="feBlend3983" />
+		</filter>
+		<filter
+			 x="-0.050000001"
+			 y="-0.050000001"
+			 width="1.1"
+			 height="1.1"
+			 color-interpolation-filters="sRGB"
+			 id="filter3797">
+			<feGaussianBlur
+				 result="result1"
+				 stdDeviation="1"
+				 id="feGaussianBlur3799" />
+			<feComposite
+				 in2="result1"
+				 operator="in"
+				 in="result1"
+				 result="result4"
+				 id="feComposite3801" />
+			<feBlend
+				 in2="result4"
+				 mode="screen"
+				 in="result1"
+				 result="result5"
+				 id="feBlend3803" />
+			<feGaussianBlur
+				 in="result5"
+				 result="result6"
+				 stdDeviation="8"
+				 id="feGaussianBlur3805" />
+			<feComposite
+				 in2="result5"
+				 operator="atop"
+				 in="result6"
+				 result="result8"
+				 id="feComposite3807" />
+			<feComposite
+				 in2="result8"
+				 operator="in"
+				 in="result6"
+				 result="fbSourceGraphic"
+				 id="feComposite3809" />
+			<feGaussianBlur
+				 stdDeviation="2.5"
+				 in="fbSourceGraphic"
+				 result="result0"
+				 id="feGaussianBlur3811" />
+			<feSpecularLighting
+				 in="result0"
+				 result="result1"
+				 lighting-color="#ffffff"
+				 surfaceScale="1"
+				 specularConstant="1.5"
+				 specularExponent="45"
+				 id="feSpecularLighting3813">
+				<fePointLight
+					 x="-6000"
+				 y="-9000"
+				 z="21000"
+				 id="fePointLight3815" />
+			</feSpecularLighting>
+			<feComposite
+				 in2="fbSourceGraphic"
+				 operator="in"
+				 in="result1"
+				 result="result2"
+				 id="feComposite3817" />
+			<feComposite
+				 in2="result2"
+				 operator="arithmetic"
+				 k1="0"
+				 k2="1"
+				 k3="1"
+				 k4="0"
+				 in="fbSourceGraphic"
+				 result="result4"
+				 id="feComposite3819" />
+			<feComposite
+				 in2="result4"
+				 operator="in"
+				 result="result91"
+				 id="feComposite3821" />
+			<feBlend
+				 in2="result91"
+				 mode="multiply"
+				 id="feBlend3823" />
+		</filter>
+	<filter
+	   x="-0.050000001"
+	   y="-0.050000001"
+	   width="1.1"
+	   height="1.1"
+	   color-interpolation-filters="sRGB"
+	   id="filter3947">
+	  <feGaussianBlur
+		 result="result1"
+		 stdDeviation="1"
+		 id="feGaussianBlur3949" />
+	  <feComposite
+		 in2="result1"
+		 operator="in"
+		 in="result1"
+		 result="result4"
+		 id="feComposite3951" />
+	  <feBlend
+		 in2="result4"
+		 mode="screen"
+		 in="result1"
+		 result="result5"
+		 id="feBlend3953" />
+	  <feGaussianBlur
+		 in="result5"
+		 result="result6"
+		 stdDeviation="8"
+		 id="feGaussianBlur3955" />
+	  <feComposite
+		 in2="result5"
+		 operator="atop"
+		 in="result6"
+		 result="result8"
+		 id="feComposite3957" />
+	  <feComposite
+		 in2="result8"
+		 operator="in"
+		 in="result6"
+		 result="fbSourceGraphic"
+		 id="feComposite3959" />
+	  <feGaussianBlur
+		 stdDeviation="2.5"
+		 in="fbSourceGraphic"
+		 result="result0"
+		 id="feGaussianBlur3961" />
+	  <feSpecularLighting
+		 in="result0"
+		 result="result1"
+		 lighting-color="#ffffff"
+		 surfaceScale="1"
+		 specularConstant="1.5"
+		 specularExponent="45"
+		 id="feSpecularLighting3963">
+		<fePointLight
+		   x="-6000"
+		   y="-9000"
+		   z="21000"
+		   id="fePointLight3965" />
+	  </feSpecularLighting>
+	  <feComposite
+		 in2="fbSourceGraphic"
+		 operator="in"
+		 in="result1"
+		 result="result2"
+		 id="feComposite3967" />
+	  <feComposite
+		 in2="result2"
+		 operator="arithmetic"
+		 k1="0"
+		 k2="1"
+		 k3="1"
+		 k4="0"
+		 in="fbSourceGraphic"
+		 result="result4"
+		 id="feComposite3969" />
+	  <feComposite
+		 in2="result4"
+		 operator="in"
+		 result="result91"
+		 id="feComposite3971" />
+	  <feBlend
+		 in2="result91"
+		 mode="multiply"
+		 id="feBlend3973" />
+	</filter>
+	<filter
+	   x="-0.050000001"
+	   y="-0.050000001"
+	   width="1.1"
+	   height="1.1"
+	   color-interpolation-filters="sRGB"
+	   id="filter3982">
+	  <feGaussianBlur
+		 result="result1"
+		 stdDeviation="1"
+		 id="feGaussianBlur3984" />
+	  <feComposite
+		 in2="result1"
+		 operator="in"
+		 in="result1"
+		 result="result4"
+		 id="feComposite3986" />
+	  <feBlend
+		 in2="result4"
+		 mode="screen"
+		 in="result1"
+		 result="result5"
+		 id="feBlend3988" />
+	  <feGaussianBlur
+		 in="result5"
+		 result="result6"
+		 stdDeviation="8"
+		 id="feGaussianBlur3990" />
+	  <feComposite
+		 in2="result5"
+		 operator="atop"
+		 in="result6"
+		 result="result8"
+		 id="feComposite3992" />
+	  <feComposite
+		 in2="result8"
+		 operator="in"
+		 in="result6"
+		 result="fbSourceGraphic"
+		 id="feComposite3994" />
+	  <feGaussianBlur
+		 stdDeviation="2.5"
+		 in="fbSourceGraphic"
+		 result="result0"
+		 id="feGaussianBlur3996" />
+	  <feSpecularLighting
+		 in="result0"
+		 result="result1"
+		 lighting-color="#ffffff"
+		 surfaceScale="1"
+		 specularConstant="1.5"
+		 specularExponent="45"
+		 id="feSpecularLighting3998">
+		<fePointLight
+		   x="-6000"
+		   y="-9000"
+		   z="21000"
+		   id="fePointLight4000" />
+	  </feSpecularLighting>
+	  <feComposite
+		 in2="fbSourceGraphic"
+		 operator="in"
+		 in="result1"
+		 result="result2"
+		 id="feComposite4002" />
+	  <feComposite
+		 in2="result2"
+		 operator="arithmetic"
+		 k1="0"
+		 k2="1"
+		 k3="1"
+		 k4="0"
+		 in="fbSourceGraphic"
+		 result="result4"
+		 id="feComposite4004" />
+	  <feComposite
+		 in2="result4"
+		 operator="in"
+		 result="result91"
+		 id="feComposite4006" />
+	  <feBlend
+		 in2="result91"
+		 mode="multiply"
+		 id="feBlend4008" />
+	</filter>
+		<!-- /good looking button attempt -->
 		<linearGradient
 			 id="linearGradient4358">
 			<stop
@@ -468,8 +799,8 @@
 			y="43%"
 			width="80%"
 			height="10%"
-			rx="50"
-			ry="50" />
+			rx="2%"
+			ry="2%" />
 		<text
 			 id="timerAverage"
 			 class="textTimerAltHeader"
@@ -483,45 +814,36 @@
 			 id="timerAverageDuration"
 			 class="textTimerAltSubHeader"
 			 x="28%"
-			 y="50%"
-			 textLength="23%"
+			 y="51%"
+			 textLength="15%"
 			 lengthAdjust="spacing"><tspan
 					 x="28%"
-					 y="50%">Dur: 42s</tspan></text>
+					 y="51%">Dur: 42s</tspan></text>
 		<text
 			 id="timerAverageFrequency"
 			 class="textTimerAltSubHeader"
 			 x="72%"
-			 y="50%"
-			 textLength="23%"
+			 y="51%"
+			 textLength="15%"
 			 lengthAdjust="spacing"><tspan
 					 x="72%"
-					 y="50%">Freq: 2m 12s</tspan></text>
+					 y="51%">Freq: 2m 12s</tspan></text>
 		<circle
-			id="timerStartBackground"
-			style="stroke:url(#radialGradientButtonOutline)"
-			class="buttonBackground"
-			cx="50%"
-			cy="78%"
-			r="25%"
-		/>
-		<circle
-			id="timerStartButton"
-			style="stroke:url(#linearGradientButton)"
-			class="startButton"
-			cx="50%"
-			cy="78%"
-			r="25%"
+			 id="timerStartButton"
+			 style="fill:#ff45ff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3961)"
+			 cx="50%"
+			 cy="78%"
+			 r="20%"
 		/>
 		<text
 			 id="textStart"
 			 class="textStartButton"
 			 x="50%"
-			 y="79%"
+			 y="80%"
 			 textLength="23%"
 			 lengthAdjust="spacing"><tspan
 					 x="50%"
-					 y="79%">Start</tspan></text>
+					 y="80%">Start</tspan></text>
 	</g>
 	<g
 		 id="history"
@@ -556,5 +878,24 @@
 			 y="15%"
 			 ry="0"
 			 rx="0" />
+		<circle
+			 id="infoResetButton"
+			 style="fill:#BF0500;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3797)"
+			 cx="50%"
+			 cy="78%"
+			 r="15%" />
+	<text
+		 x="50%"
+		 y="80%"
+		 id="text3976"
+		 xml:space="preserve"
+		 style="font-size:32px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter3982);font-family:Sans"><tspan
+			 x="50%"
+		 	 y="80%"
+			 id="tspan3978"><tspan
+			 x="50%"
+		 	 y="80%"
+			 id="tspan3980"
+			 style="font-weight:bold;-inkscape-font-specification:Sans Bold">Reset</tspan></tspan></text>
 	</g>
 </svg>

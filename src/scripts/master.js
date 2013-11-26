@@ -28,6 +28,7 @@ var rectButtonHistory;
 var rectButtonInfo;
 var historyContainer;
 var infoResetButton;
+var infoResetButtonText;
 
 //Variables
 var programState;
@@ -68,13 +69,14 @@ function init(svgElem) {
 	rectButtonInfo = document.getElementById("rectButtonInfo");
 	historyContainer = document.getElementById("historyContainer").children[0];
 	infoResetButton = document.getElementById("infoResetButton");
+	infoResetButtonText = document.getElementById("infoResetButtonText");
 	//Setup NoAction mode
 	programState = ProgramState.NoAction;
 	updateText(averageDuration, "");
 	updateText(averageFrequency, "");
 	updateText(endDurationDate, "");
 	updateText(endDurationTime, "");
-	updateStartTimeWithDateTime();
+	//updateStartTimeWithDateTime();
 	//Events
 	timerStartButton.onclick = StartClock;
 	textStart.onclick = StartClock;
@@ -82,9 +84,35 @@ function init(svgElem) {
 	tabHistory.onclick = selectHistoryTab;
 	tabInfo.onclick = selectInfoTab;
 	infoResetButton.onclick = resetHistory;
+	infoResetButtonText.onclick = resetHistory;
 	//Init database
-	if(localStorage["contractionHistory"] == null) {
+	if(localStorage["contractionHistory"] == null /*#DEBUG START*/|| true /*#DEBUG END*/) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
+		//#DEBUG START
+		localStorage["contractionHistory"] = JSON.stringify([{
+			 Start: "2013-11-26T00:00:00.000Z"
+			,Duration: (1000 * 60 * 2)
+			,Strength: "mild"
+			,NewStart: true
+		},{
+			 Start: "2013-11-26T01:00:00.000Z"
+			,Duration: (1000 * 60 * 2)
+			,Strength: "mild"
+			,NewStart: false
+		},{
+			 Start: "2013-11-26T02:00:00.000Z"
+			,Duration: (1000 * 60 * 2)
+			,Strength: "mild"
+			,NewStart: false
+		},{
+			 Start: "2013-11-24T02:00:00.000Z"
+			,Duration: (1000 * 60 * 5)
+			,Strength: "mild"
+			,NewStart: true
+		}]);
+		console.log("will update history");
+		updateHistory();
+		//#DEBUG END
 	} else {
 		updateHistory();
 	}
@@ -120,7 +148,7 @@ function moveText(id, x, y ) {
 	}
 }
 function updateStartTimeWithDateTime() {
-	db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+	var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
 	db = db.sort(sortContractions);
 	var lastFrequencyText = "";
 	var lastContractionEndedTimeText = "";
@@ -206,40 +234,59 @@ function StopClock(stopType){
 	updateText(textStart, "Start");
 }
 function storeContraction(start, end, strength) {
-	db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+	var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
 	db.push({
 		 Start: start
 		,Duration: end.getTime() - start.getTime()
 		,Strength: strength
+		,NewStart: false
 	});
 	localStorage["contractionHistory"] = JSON.stringify(db);
 	updateHistory();
 }
 function updateHistory() {
-	db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+	var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
 	db = db.sort(sortContractions);
 	var oldDiv = historyContainer.getElementsByTagName("div");
 	while((oldDiv != undefined) && (oldDiv.length && oldDiv.length > 0)) {
 		oldDiv[0].parentNode.removeChild(oldDiv[0]);
 		oldDiv = historyContainer.getElementsByTagName("div");
 	}
+	if(db.length >= 2) {
+		if(!db[0].NewStart && !db[1].NewStart) {
+			var freqText = getDuration(db[1].Start, db[0].Start);
+			updateText(frequency, freqText);
+		}
+	}
+	var durationDivisor = 0;
+	var frequencyDivisor = 0;
 	var totalDuration = 0;
 	var totalFrequency = 0;
-	if(db.length >= 2) {
-		var freqText = getDuration(db[db.length - 1].Start, db[db.length - 2].Start);
-		updateText(frequency, freqText);
-		for(var i=0; i<db.length; i++) {
-			totalDuration += db[i].Duration;
+	var foundNewStart = false;
+	for(var i=0; (!foundNewStart) && i<db.length; i++) {
+		totalDuration += db[i].Duration;
+		durationDivisor++;
+		foundNewStart = db[i].NewStart;
+		if( !foundNewStart ) {
 			if( (i+1) < db.length ) {
 				totalFrequency += db[i].Start.getTime() - db[i+1].Start.getTime();
+				frequencyDivisor++;
 			}
-			var div = contractionEventToHTML(db[i], ((i+1) < db.length) ? db[i+1].Start : null);
-			historyContainer.appendChild(div);
 		}
-		var avgDurationText = millisecondsToDurationString(totalDuration / db.length);
-		var averageFrequencyText = millisecondsToDurationString(totalFrequency / db.length);
-		updateText(averageDuration, "Dur: " + avgDurationText);
-		updateText(averageFrequency, "Freq: " + averageFrequencyText);
+	}
+	var avgDurationText = "";
+	var avgFrequencyText = "";
+	if(frequencyDivisor >0) {
+		avgFrequencyText = "Freq: " + millisecondsToDurationString(totalFrequency / frequencyDivisor);
+	}
+	if(durationDivisor >0) {
+		avgDurationText = "Dur: " + millisecondsToDurationString(totalDuration / durationDivisor);
+	}
+	updateText(averageDuration, avgDurationText);
+	updateText(averageFrequency, avgFrequencyText);
+	for(var i=0; i<db.length; i++) {
+		var div = contractionEventToHTML(db[i], ((i+1) < db.length) ? db[i+1].Start : null);
+		historyContainer.appendChild(div);
 	}
 }
 function sortContractions(a,b) {
@@ -393,6 +440,9 @@ function contractionEventToHTML(contractionEvent, lastStartTime) {
 	}
 	var div = document.createElementNS(xhtmlNS,"div");
 	div.className = "historyItem";
+	if(contractionEvent.NewStart) {
+		div.style.borderBottom = "2px solid red";
+	}
 	var table = document.createElementNS(xhtmlNS,"table");
 	table.style.width = "100%";
 	var tr1 = document.createElementNS(xhtmlNS,"tr");

@@ -102,7 +102,7 @@
 			 width="1.1"
 			 height="1.1"
 			 color-interpolation-filters="sRGB"
-			 id="filter3797">
+			 id="filter3DButton">
 			<feGaussianBlur
 				 result="result1"
 				 stdDeviation="1"
@@ -181,176 +181,91 @@
 				 mode="multiply"
 				 id="feBlend3823" />
 		</filter>
-	<filter
-	   x="-0.050000001"
-	   y="-0.050000001"
-	   width="1.1"
-	   height="1.1"
-	   color-interpolation-filters="sRGB"
-	   id="filter3947">
-	  <feGaussianBlur
-		 result="result1"
-		 stdDeviation="1"
-		 id="feGaussianBlur3949" />
-	  <feComposite
-		 in2="result1"
-		 operator="in"
-		 in="result1"
-		 result="result4"
-		 id="feComposite3951" />
-	  <feBlend
-		 in2="result4"
-		 mode="screen"
-		 in="result1"
-		 result="result5"
-		 id="feBlend3953" />
-	  <feGaussianBlur
-		 in="result5"
-		 result="result6"
-		 stdDeviation="8"
-		 id="feGaussianBlur3955" />
-	  <feComposite
-		 in2="result5"
-		 operator="atop"
-		 in="result6"
-		 result="result8"
-		 id="feComposite3957" />
-	  <feComposite
-		 in2="result8"
-		 operator="in"
-		 in="result6"
-		 result="fbSourceGraphic"
-		 id="feComposite3959" />
-	  <feGaussianBlur
-		 stdDeviation="2.5"
-		 in="fbSourceGraphic"
-		 result="result0"
-		 id="feGaussianBlur3961" />
-	  <feSpecularLighting
-		 in="result0"
-		 result="result1"
-		 lighting-color="#ffffff"
-		 surfaceScale="1"
-		 specularConstant="1.5"
-		 specularExponent="45"
-		 id="feSpecularLighting3963">
-		<fePointLight
-		   x="-6000"
-		   y="-9000"
-		   z="21000"
-		   id="fePointLight3965" />
-	  </feSpecularLighting>
-	  <feComposite
-		 in2="fbSourceGraphic"
-		 operator="in"
-		 in="result1"
-		 result="result2"
-		 id="feComposite3967" />
-	  <feComposite
-		 in2="result2"
-		 operator="arithmetic"
-		 k1="0"
-		 k2="1"
-		 k3="1"
-		 k4="0"
-		 in="fbSourceGraphic"
-		 result="result4"
-		 id="feComposite3969" />
-	  <feComposite
-		 in2="result4"
-		 operator="in"
-		 result="result91"
-		 id="feComposite3971" />
-	  <feBlend
-		 in2="result91"
-		 mode="multiply"
-		 id="feBlend3973" />
-	</filter>
-	<filter
-	   x="-0.050000001"
-	   y="-0.050000001"
-	   width="1.1"
-	   height="1.1"
-	   color-interpolation-filters="sRGB"
-	   id="filter3982">
-	  <feGaussianBlur
-		 result="result1"
-		 stdDeviation="1"
-		 id="feGaussianBlur3984" />
-	  <feComposite
-		 in2="result1"
-		 operator="in"
-		 in="result1"
-		 result="result4"
-		 id="feComposite3986" />
-	  <feBlend
-		 in2="result4"
-		 mode="screen"
-		 in="result1"
-		 result="result5"
-		 id="feBlend3988" />
-	  <feGaussianBlur
-		 in="result5"
-		 result="result6"
-		 stdDeviation="8"
-		 id="feGaussianBlur3990" />
-	  <feComposite
-		 in2="result5"
-		 operator="atop"
-		 in="result6"
-		 result="result8"
-		 id="feComposite3992" />
-	  <feComposite
-		 in2="result8"
-		 operator="in"
-		 in="result6"
-		 result="fbSourceGraphic"
-		 id="feComposite3994" />
-	  <feGaussianBlur
-		 stdDeviation="2.5"
-		 in="fbSourceGraphic"
-		 result="result0"
-		 id="feGaussianBlur3996" />
-	  <feSpecularLighting
-		 in="result0"
-		 result="result1"
-		 lighting-color="#ffffff"
-		 surfaceScale="1"
-		 specularConstant="1.5"
-		 specularExponent="45"
-		 id="feSpecularLighting3998">
-		<fePointLight
-		   x="-6000"
-		   y="-9000"
-		   z="21000"
-		   id="fePointLight4000" />
-	  </feSpecularLighting>
-	  <feComposite
-		 in2="fbSourceGraphic"
-		 operator="in"
-		 in="result1"
-		 result="result2"
-		 id="feComposite4002" />
-	  <feComposite
-		 in2="result2"
-		 operator="arithmetic"
-		 k1="0"
-		 k2="1"
-		 k3="1"
-		 k4="0"
-		 in="fbSourceGraphic"
-		 result="result4"
-		 id="feComposite4004" />
-	  <feComposite
-		 in2="result4"
-		 operator="in"
-		 result="result91"
-		 id="feComposite4006" />
-	  <feBlend
-		 in2="result91"
-		 mode="multiply"
-		 id="feBlend4008" />
-	</filter>
+		<filter
+			 x="-0.050000001"
+			 y="-0.050000001"
+			 width="1.1"
+			 height="1.1"
+			 color-interpolation-filters="sRGB"
+			 id="filterFadedButtonText">
+			<feGaussianBlur
+				 result="result1"
+				 stdDeviation="1"
+				 id="feGaussianBlur3984" />
+			<feComposite
+				 in2="result1"
+				 operator="in"
+				 in="result1"
+				 result="result4"
+				 id="feComposite3986" />
+			<feBlend
+				 in2="result4"
+				 mode="screen"
+				 in="result1"
+				 result="result5"
+				 id="feBlend3988" />
+			<feGaussianBlur
+				 in="result5"
+				 result="result6"
+				 stdDeviation="8"
+				 id="feGaussianBlur3990" />
+			<feComposite
+				 in2="result5"
+				 operator="atop"
+				 in="result6"
+				 result="result8"
+				 id="feComposite3992" />
+			<feComposite
+				 in2="result8"
+				 operator="in"
+				 in="result6"
+				 result="fbSourceGraphic"
+				 id="feComposite3994" />
+			<feGaussianBlur
+				 stdDeviation="2.5"
+				 in="fbSourceGraphic"
+				 result="result0"
+				 id="feGaussianBlur3996" />
+			<feSpecularLighting
+				 in="result0"
+				 result="result1"
+				 lighting-color="#ffffff"
+				 surfaceScale="1"
+				 specularConstant="1.5"
+				 specularExponent="45"
+				 id="feSpecularLighting3998">
+				<fePointLight
+					 x="-6000"
+					 y="-9000"
+					 z="21000"
+					 id="fePointLight4000" />
+			</feSpecularLighting>
+			<feComposite
+				 in2="fbSourceGraphic"
+				 operator="in"
+				 in="result1"
+				 result="result2"
+				 id="feComposite4002" />
+			<feComposite
+				 in2="result2"
+				 operator="arithmetic"
+				 k1="0"
+				 k2="1"
+				 k3="1"
+				 k4="0"
+				 in="fbSourceGraphic"
+				 result="result4"
+				 id="feComposite4004" />
+			<feComposite
+				 in2="result4"
+				 operator="in"
+				 result="result91"
+				 id="feComposite4006" />
+			<feBlend
+				 in2="result91"
+				 mode="multiply"
+				 id="feBlend4008" />
+		</filter>
 		<!-- /good looking button attempt -->
 		<linearGradient
 			 id="linearGradient4358">
@@ -830,20 +745,18 @@
 					 y="51%">Freq: 2m 12s</tspan></text>
 		<circle
 			 id="timerStartButton"
-			 style="fill:#ff45ff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3961)"
+			 style="fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-width: 1; stroke-miterlimit: 4; stroke-opacity: 1; stroke-dasharray: none; filter: url(#filter3DButton); fill:#EF35EF;"
 			 cx="50%"
 			 cy="78%"
-			 r="20%"
-		/>
+			 r="20%" />
 		<text
 			 id="textStart"
-			 class="textStartButton"
 			 x="50%"
 			 y="80%"
-			 textLength="23%"
-			 lengthAdjust="spacing"><tspan
-					 x="50%"
-					 y="80%">Start</tspan></text>
+			 style="font-size:275%;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#FFFFFF;fill-opacity:1;stroke:none;filter:url(#filterFadedButtonText);font-family:Sans"><tspan
+				 x="50%"
+				 y="80%"
+				 style="font-weight:bold;-inkscape-font-specification:Sans Bold">Start</tspan></text>
 	</g>
 	<g
 		 id="history"
@@ -862,10 +775,8 @@
 			 y="15%"
 			 width="100%"
 			 height="85%">
-				<xhtml:div style="overflow: scroll; height: 100%;">
-
-				</xhtml:div>
-			</foreignObject>
+			<xhtml:div style="overflow: scroll; height: 100%;"></xhtml:div>
+		</foreignObject>
 	</g>
 	<g
 		 id="info"
@@ -880,22 +791,17 @@
 			 rx="0" />
 		<circle
 			 id="infoResetButton"
-			 style="fill:#BF0500;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3797)"
+			 style="fill:#BF0500;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3DButton)"
 			 cx="50%"
 			 cy="78%"
 			 r="15%" />
-	<text
-		 x="50%"
-		 y="80%"
-		 id="text3976"
-		 xml:space="preserve"
-		 style="font-size:32px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter3982);font-family:Sans"><tspan
+		<text
+			 id="infoResetButtonText"
 			 x="50%"
-		 	 y="80%"
-			 id="tspan3978"><tspan
-			 x="50%"
-		 	 y="80%"
-			 id="tspan3980"
-			 style="font-weight:bold;-inkscape-font-specification:Sans Bold">Reset</tspan></tspan></text>
+			 y="80%"
+			 style="font-size:32px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filterFadedButtonText);font-family:Sans"><tspan
+				 x="50%"
+				 y="80%"
+				 style="font-weight:bold;-inkscape-font-specification:Sans Bold">Reset</tspan></text>
 	</g>
 </svg>

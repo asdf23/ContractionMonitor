@@ -48,6 +48,7 @@ var infoDurationStrength;
 var infoDurationDurationHour;
 var infoDurationDurationMinute;
 var infoDurationDurationSecond;
+var infoDeleteRecord;
 
 var promptMonth;
 var promptDay;
@@ -126,6 +127,7 @@ function init(svgElem) {
 	infoDurationDurationHour = document.getElementById("infoDurationDurationHour");
 	infoDurationDurationMinute = document.getElementById("infoDurationDurationMinute");
 	infoDurationDurationSecond = document.getElementById("infoDurationDurationSecond");
+	infoDeleteRecord = document.getElementById("infoDeleteRecord");
 	//Setup NoAction mode
 	programState = ProgramState.NoAction;
 	updateText(averageDuration, "");
@@ -159,6 +161,7 @@ function init(svgElem) {
 	infoDurationDurationHour.onclick = function() { updateContraction(this, "Duration", "Hour"); };
 	infoDurationDurationMinute.onclick = function() { updateContraction(this, "Duration", "Minute"); };
 	infoDurationDurationSecond.onclick = function() { updateContraction(this, "Duration", "Second"); };
+	infoDeleteRecord.onclick = deleteCurrentRecord;
 	//Init database
 	if(localStorage["contractionHistory"] == null /*#DEBUG START*/|| true /*#DEBUG END*/) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
@@ -523,6 +526,41 @@ function selectInfoTab() {
 	rectButtonInfo.classList.add("active");
 	repairCheckBoxUI();
 }
+function deleteCurrentRecord() {
+	if(editingDatabaseIndex != null) {
+		var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+		db = db.sort(sortContractions);
+		db.splice(editingDatabaseIndex, 1);
+		localStorage["contractionHistory"] = JSON.stringify(db);
+		updateHistory();
+		editingDatabaseIndex = null;
+		var hiddenTextItems = layerInfo.getElementsByClassName("textInfoEdit");
+		for(var i=0; i<hiddenTextItems.length; i++) {
+			hiddenTextItems[i].setAttribute("display", "none");
+		}
+		infoDurationStrength.setAttribute("display", "none");
+		infoDurationStartYear.setAttribute("display", "none");
+		infoDurationStartMonth.setAttribute("display", "none");
+		infoDurationStartDay.setAttribute("display", "none");
+		infoDurationStartHour.setAttribute("display", "none");
+		infoDurationStartMinute.setAttribute("display", "none");
+		infoDurationStartSecond.setAttribute("display", "none");
+		infoDurationStartAMPM.setAttribute("display", "none");
+		infoDurationEndedYear.setAttribute("display", "none");
+		infoDurationEndedMonth.setAttribute("display", "none");
+		infoDurationEndedDay.setAttribute("display", "none");
+		infoDurationEndedHour.setAttribute("display", "none");
+		infoDurationEndedMinute.setAttribute("display", "none");
+		infoDurationEndedSecond.setAttribute("display", "none");
+		infoDurationEndedAMPM.setAttribute("display", "none");
+		infoDurationDurationHour.setAttribute("display", "none");
+		infoDurationDurationMinute.setAttribute("display", "none");
+		infoDurationDurationSecond.setAttribute("display", "none");
+		infoNewStop.setAttribute("display", "none");
+		infoDeleteRecord.setAttribute("display", "none");
+		selectTimerTab();
+	}
+}
 function loadInfoItem(contractionEvent, index) {
 	editingDatabaseIndex = index;
 	var startDateData = dateToDateString(contractionEvent.Start).split("/");
@@ -576,6 +614,7 @@ function loadInfoItem(contractionEvent, index) {
 	infoDurationDurationHour.removeAttribute("display");
 	infoDurationDurationMinute.removeAttribute("display");
 	infoDurationDurationSecond.removeAttribute("display");
+	infoDeleteRecord.removeAttribute("display");
 	infoNewStop.removeAttribute("display");
 	selectInfoTab();
 }

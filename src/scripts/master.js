@@ -266,7 +266,6 @@ function updateStartTimeWithDateTime() {
 }
 function StartClock(){
 	//Depending on state.. assuming NoAction for now...
-	console.log("Der clickerson");
 	if(programState == ProgramState.NoAction ) {
 		console.log(" starting..");
 		programState = ProgramState.InContraction;
@@ -613,7 +612,6 @@ function loadInfoItem(index) {
 	} else {
 		infoNewStopCheckBox.setAttribute("display", "none");
 	}
-console.log("show me dat:" + contractionEvent.Note);
 	if(contractionEvent.Note != null && contractionEvent.Note.length > 0) {
 		infoNotepadIcon.getElementsByClassName("textNotepad")[0].removeAttribute("display");
 		promptInfoNote.value = contractionEvent.Note;
@@ -883,15 +881,26 @@ function setContraction(sender, field, datePart) {
 	updateHistory();
 }
 function toggleCheckBox(checkBox) {
+	var newValue = false;
 	if(checkBox.hasAttribute("display")) {
 		checkBox.removeAttribute("display");
+		newValue = true;
 		repairCheckBoxUI();
 	} else {
 		checkBox.setAttribute("display", "none");
 	}
+	//HACK: incorrectly assuming that this checkbox is the only checkbox and is responsible for updating an info item
+	if(editingDatabaseIndex != null) {
+		var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+		db = db.sort(sortContractions);
+		db[editingDatabaseIndex].NewStart = newValue;
+		localStorage["contractionHistory"] = JSON.stringify(db);
+		updateHistory();
+	}
 }
 function repairCheckBoxUI() {
-	//Repair UI.. cannot set height as percentage of width?
+	//Repair UI.. Unknown: cannot set height as percentage of width?
+	//Due to bug getBBox will fail unless item is rendered otherwise this code should be called once at init
 	var checkBoxCount = document.getElementsByClassName("rectCheckBox").length;
 	for(var i=0; i<checkBoxCount; i++) {
 		try {
@@ -919,7 +928,6 @@ function hideTextarea(sender, purpose, textArea) {
 		sender.getElementsByClassName("textNotepad")[0].setAttribute("display", "none");
 	}
 	if((purpose == "Edit") && (editingDatabaseIndex != null)) {
-		console.log("going to save me dat");
 		var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
 		db = db.sort(sortContractions);
 		console.log(textArea.value);

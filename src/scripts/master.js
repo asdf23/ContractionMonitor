@@ -49,6 +49,8 @@ var infoDurationDurationHour;
 var infoDurationDurationMinute;
 var infoDurationDurationSecond;
 var infoDeleteRecord;
+var timerNotepadIcon;
+var infoNotepadIcon;
 
 var promptMonth;
 var promptDay;
@@ -58,6 +60,8 @@ var promptMinute;
 var promptSecond;
 var promptAMPM;
 var promptStrengthChange;
+var promptTimerNote;
+var promptInfoNote;
 
 //Variables
 var programState;
@@ -121,6 +125,8 @@ function init(svgElem) {
 	promptSecond = document.getElementById("promptSecond").children[0];
 	promptAMPM = document.getElementById("promptAMPM").children[0];
 	promptStrengthChange = document.getElementById("promptStrengthChange").children[0];
+	promptTimerNote = document.getElementById("promptTimerNote").children[0];
+	promptInfoNote = document.getElementById("promptInfoNote").children[0];
 	infoNewStop = document.getElementById("infoNewStop");
 	infoNewStopCheckBox = document.getElementById("infoNewStopCheckBox");
 	infoDurationStrength = document.getElementById("infoDurationStrength");
@@ -128,6 +134,8 @@ function init(svgElem) {
 	infoDurationDurationMinute = document.getElementById("infoDurationDurationMinute");
 	infoDurationDurationSecond = document.getElementById("infoDurationDurationSecond");
 	infoDeleteRecord = document.getElementById("infoDeleteRecord");
+	timerNotepadIcon = document.getElementById("timerNotepadIcon");
+	infoNotepadIcon = document.getElementById("infoNotepadIcon");
 	//Setup NoAction mode
 	programState = ProgramState.NoAction;
 	updateText(averageDuration, "");
@@ -162,6 +170,8 @@ function init(svgElem) {
 	infoDurationDurationMinute.onclick = function() { updateContraction(this, "Duration", "Minute"); };
 	infoDurationDurationSecond.onclick = function() { updateContraction(this, "Duration", "Second"); };
 	infoDeleteRecord.onclick = deleteCurrentRecord;
+	timerNotepadIcon.onclick = function() { showTextarea(timerNotepadIcon, "New", promptTimerNote); };
+	infoNotepadIcon.onclick = function() { showTextarea(infoNotepadIcon, "Edit", promptInfoNote); };
 	//Init database
 	if(localStorage["contractionHistory"] == null /*#DEBUG START*/|| true /*#DEBUG END*/) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
@@ -169,23 +179,27 @@ function init(svgElem) {
 		localStorage["contractionHistory"] = JSON.stringify([{
 			 Start: "2013-11-26T00:00:00.000Z"
 			,Duration: (1000 * 60 * 2)
-			,Strength: "mild"
+			,Strength: "regular"
 			,NewStart: true
+			,Note: "a note"
 		},{
 			 Start: "2013-11-26T01:00:00.000Z"
 			,Duration: (1000 * 60 * 2)
 			,Strength: "mild"
 			,NewStart: false
+			,Note: ""
 		},{
 			 Start: "2013-11-26T02:00:00.000Z"
 			,Duration: (1000 * 60 * 2)
 			,Strength: "mild"
 			,NewStart: false
+			,Note: ""
 		},{
 			 Start: "2013-11-24T02:00:00.000Z"
 			,Duration: (1000 * 60 * 5)
 			,Strength: "mild"
 			,NewStart: true
+			,Note: ""
 		}]);
 		console.log("will update history");
 		updateHistory();
@@ -289,7 +303,9 @@ function selectStrengthBlur() {
 		default:
 			clearInterval(ptrContractionStart);
 			selectStrength.onblur = null;
-			storeContraction(contractionStartTime, possibleStopTime, selectStrength.value);
+			storeContraction(contractionStartTime, possibleStopTime, selectStrength.value, promptTimerNote.value);
+			timerNotepadIcon.getElementsByClassName("textNotepad")[0].setAttribute("display","none");
+			promptTimerNote.value = "";
 			programState = ProgramState.NoAction;
 			updateText(textStart, "Start");
 			updateText(endDurationTime, dateToTimeString(possibleStopTime, false));
@@ -310,13 +326,14 @@ function StopClock(stopType){
 	clearInterval(ptrContractionStart);
 	updateText(textStart, "Start");
 }
-function storeContraction(start, end, strength) {
+function storeContraction(start, end, strength, note) {
 	var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
 	db.push({
 		 Start: start
 		,Duration: end.getTime() - start.getTime()
 		,Strength: strength
 		,NewStart: false
+		,Note: note
 	});
 	localStorage["contractionHistory"] = JSON.stringify(db);
 	updateHistory();
@@ -558,11 +575,15 @@ function deleteCurrentRecord() {
 		infoDurationDurationSecond.setAttribute("display", "none");
 		infoNewStop.setAttribute("display", "none");
 		infoDeleteRecord.setAttribute("display", "none");
+		infoNotepadIcon.setAttribute("display", "none");
 		selectTimerTab();
 	}
 }
-function loadInfoItem(contractionEvent, index) {
+function loadInfoItem(index) {
 	editingDatabaseIndex = index;
+	var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+	db = db.sort(sortContractions);
+	var contractionEvent = db[editingDatabaseIndex];
 	var startDateData = dateToDateString(contractionEvent.Start).split("/");
 	var startTimeData = timeStringToArray(dateToTimeString(contractionEvent.Start, true));
 	var endedDate = new Date(contractionEvent.Start.getTime() + contractionEvent.Duration);
@@ -592,6 +613,14 @@ function loadInfoItem(contractionEvent, index) {
 	} else {
 		infoNewStopCheckBox.setAttribute("display", "none");
 	}
+console.log("show me dat:" + contractionEvent.Note);
+	if(contractionEvent.Note != null && contractionEvent.Note.length > 0) {
+		infoNotepadIcon.getElementsByClassName("textNotepad")[0].removeAttribute("display");
+		promptInfoNote.value = contractionEvent.Note;
+	} else {
+		infoNotepadIcon.getElementsByClassName("textNotepad")[0].setAttribute("display", "none");
+		promptInfoNote.value = "";
+	}
 	var hiddenTextItems = layerInfo.getElementsByClassName("textInfoEdit");
 	for(var i=0; i<hiddenTextItems.length; i++) {
 		hiddenTextItems[i].removeAttribute("display");
@@ -616,6 +645,7 @@ function loadInfoItem(contractionEvent, index) {
 	infoDurationDurationSecond.removeAttribute("display");
 	infoDeleteRecord.removeAttribute("display");
 	infoNewStop.removeAttribute("display");
+	infoNotepadIcon.removeAttribute("display");
 	selectInfoTab();
 }
 function contractionEventToHTML(contractionEvent, lastStartTime, index) {
@@ -640,6 +670,8 @@ function contractionEventToHTML(contractionEvent, lastStartTime, index) {
 	var tr4 = document.createElementNS(xhtmlNS,"tr");
 	var td = document.createElementNS(xhtmlNS,"td");
 	var divInfo = document.createElementNS(xhtmlNS,"div");
+	var spanInfo = document.createElementNS(xhtmlNS,"span");
+	var spanNote = document.createElementNS(xhtmlNS,"span");
 	divInfo.style.fontStyle = "italic";
 	divInfo.style.backgroundColor = "#0000FF";
 	divInfo.style.borderRadius = "10px";
@@ -651,8 +683,14 @@ function contractionEventToHTML(contractionEvent, lastStartTime, index) {
 	divInfo.style.fontFamily = "Century Schoolbook L";
 	divInfo.style.fontWeight = "bolder";
 	divInfo.style.textAlign = "center";
-	divInfo.innerHTML = "i";
-	divInfo.onclick = function() {loadInfoItem(contractionEvent, index);};
+	spanInfo.innerHTML = "i";
+	spanNote.innerHTML = "!";
+	spanNote.style.color = "red";
+	divInfo.appendChild(spanInfo);
+	if( contractionEvent.Note != null && contractionEvent.Note.length > 0 ) {
+		divInfo.appendChild(spanNote);
+	}
+	divInfo.onclick = function() {loadInfoItem(index);};
 	td.rowSpan = 2;
 	td.style.width = "20%";
 	td.innerHTML = contractionEvent.Strength;
@@ -841,7 +879,7 @@ function setContraction(sender, field, datePart) {
 		}
 	}
 	localStorage["contractionHistory"] = JSON.stringify(db);
-	loadInfoItem(db[editingDatabaseIndex], editingDatabaseIndex);
+	loadInfoItem(editingDatabaseIndex);
 	updateHistory();
 }
 function toggleCheckBox(checkBox) {
@@ -866,5 +904,27 @@ function repairCheckBoxUI() {
 			document.getElementsByClassName("rectCheckBoxFill")[i].setAttribute("height", w);
 		} catch(ex) {
 		}
+	}
+}
+function showTextarea(sender, purpose, textArea) {
+	textArea.parentElement.removeAttribute("display");
+	textArea.onblur = function() { hideTextarea(sender, purpose, textArea); }; //Unknown: if this is set in the events section of init() it will not fire
+	textArea.focus();
+}
+function hideTextarea(sender, purpose, textArea) {
+	textArea.parentElement.setAttribute("display", "none");
+	if(textArea.value.length > 0) {
+		sender.getElementsByClassName("textNotepad")[0].removeAttribute("display");
+	} else {
+		sender.getElementsByClassName("textNotepad")[0].setAttribute("display", "none");
+	}
+	if((purpose == "Edit") && (editingDatabaseIndex != null)) {
+		console.log("going to save me dat");
+		var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+		db = db.sort(sortContractions);
+		console.log(textArea.value);
+		db[editingDatabaseIndex].Note = textArea.value;
+		localStorage["contractionHistory"] = JSON.stringify(db);
+		updateHistory();
 	}
 }

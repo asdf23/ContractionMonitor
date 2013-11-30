@@ -17,7 +17,7 @@
 	stroke-width:2px;
 	stroke-linecap:butt;
 	stroke-linejoin:miter;
-	stroke-opacity:1
+	stroke-opacity:1;
 	fill:url(#linearGradientButtonFade); /* <-- doesn't work */
 }
 .active {
@@ -194,8 +194,47 @@
 	font-family:Sans;
 	text-anchor: middle;
 }
+.textInfoEdit {
+	font-size:300%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ffffff;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
+.textInfoNewStop {
+	font-size:200%;
+	font-style:normal;
+	font-weight:normal;
+	line-height:125%;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#ffffff;
+	fill-opacity:1;
+	stroke:none;
+	font-family:Sans;
+	text-anchor: middle;
+}
 .historyItem {
 	border-bottom: 1px solid white;
 	color: white;
 	font-family: monospace;
+}
+.rectCheckBox {
+	stroke-width: 5px;
+	stroke: rgb(255, 255, 255);
+	stroke-opacity: 1;
+	fill: #FFFFFF;
+	fill-opacity: 0.2;
+	stroke-linejoin:bevel;
+}
+.rectCheckBoxFill {
+	fill: rgb(255, 255, 255);
+	stroke: none;
+	stroke-linejoin:bevel;
 }

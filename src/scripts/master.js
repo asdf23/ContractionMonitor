@@ -28,13 +28,42 @@ var rectButtonHistory;
 var rectButtonInfo;
 var historyContainer;
 var infoResetButton;
-var infoResetButtonText;
+var infoDurationEndedAMPM;
+var infoDurationEndedSecond;
+var infoDurationEndedMinute;
+var infoDurationEndedHour;
+var infoDurationEndedDay;
+var infoDurationEndedMonth;
+var infoDurationEndedYear;
+var infoDurationStartAMPM;
+var infoDurationStartSecond;
+var infoDurationStartMinute;
+var infoDurationStartHour;
+var infoDurationStartDay;
+var infoDurationStartMonth;
+var infoDurationStartYear;
+var infoNewStop;
+var infoNewStopCheckBox;
+var infoDurationStrength;
+var infoDurationDurationHour;
+var infoDurationDurationMinute;
+var infoDurationDurationSecond;
+
+var promptMonth;
+var promptDay;
+var promptHour;
+var promptYear;
+var promptMinute;
+var promptSecond;
+var promptAMPM;
+var promptStrengthChange;
 
 //Variables
 var programState;
 var contractionStartTime;
 var contractionEndTime;
 var possibleStopTime;
+var editingDatabaseIndex = null;
 
 //Enum
 var ProgramState = {
@@ -69,7 +98,34 @@ function init(svgElem) {
 	rectButtonInfo = document.getElementById("rectButtonInfo");
 	historyContainer = document.getElementById("historyContainer").children[0];
 	infoResetButton = document.getElementById("infoResetButton");
-	infoResetButtonText = document.getElementById("infoResetButtonText");
+	infoDurationEndedAMPM = document.getElementById("infoDurationEndedAMPM");
+	infoDurationEndedSecond = document.getElementById("infoDurationEndedSecond");
+	infoDurationEndedMinute = document.getElementById("infoDurationEndedMinute");
+	infoDurationEndedHour = document.getElementById("infoDurationEndedHour");
+	infoDurationEndedDay = document.getElementById("infoDurationEndedDay");
+	infoDurationEndedMonth = document.getElementById("infoDurationEndedMonth");
+	infoDurationEndedYear = document.getElementById("infoDurationEndedYear");
+	infoDurationStartAMPM = document.getElementById("infoDurationStartAMPM");
+	infoDurationStartSecond = document.getElementById("infoDurationStartSecond");
+	infoDurationStartMinute = document.getElementById("infoDurationStartMinute");
+	infoDurationStartHour = document.getElementById("infoDurationStartHour");
+	infoDurationStartDay = document.getElementById("infoDurationStartDay");
+	infoDurationStartMonth = document.getElementById("infoDurationStartMonth");
+	infoDurationStartYear = document.getElementById("infoDurationStartYear");
+	promptMonth = document.getElementById("promptMonth").children[0];
+	promptDay = document.getElementById("promptDay").children[0];
+	promptHour = document.getElementById("promptHour").children[0];
+	promptYear = document.getElementById("promptYear").children[0];
+	promptMinute = document.getElementById("promptMinute").children[0];
+	promptSecond = document.getElementById("promptSecond").children[0];
+	promptAMPM = document.getElementById("promptAMPM").children[0];
+	promptStrengthChange = document.getElementById("promptStrengthChange").children[0];
+	infoNewStop = document.getElementById("infoNewStop");
+	infoNewStopCheckBox = document.getElementById("infoNewStopCheckBox");
+	infoDurationStrength = document.getElementById("infoDurationStrength");
+	infoDurationDurationHour = document.getElementById("infoDurationDurationHour");
+	infoDurationDurationMinute = document.getElementById("infoDurationDurationMinute");
+	infoDurationDurationSecond = document.getElementById("infoDurationDurationSecond");
 	//Setup NoAction mode
 	programState = ProgramState.NoAction;
 	updateText(averageDuration, "");
@@ -84,7 +140,25 @@ function init(svgElem) {
 	tabHistory.onclick = selectHistoryTab;
 	tabInfo.onclick = selectInfoTab;
 	infoResetButton.onclick = resetHistory;
-	infoResetButtonText.onclick = resetHistory;
+	infoNewStop.onclick = function() { toggleCheckBox(infoNewStopCheckBox); };
+	infoDurationEndedAMPM.onclick = function() { updateContraction(this, "Ended", "AMPM"); };
+	infoDurationEndedSecond.onclick = function() { updateContraction(this, "Ended", "Second"); };
+	infoDurationEndedMinute.onclick = function() { updateContraction(this, "Ended", "Minute"); };
+	infoDurationEndedHour.onclick = function() { updateContraction(this, "Ended", "Hour"); };
+	infoDurationEndedDay.onclick = function() { updateContraction(this, "Ended", "Day"); };
+	infoDurationEndedMonth.onclick = function() { updateContraction(this, "Ended", "Month"); };
+	infoDurationEndedYear.onclick = function() { updateContraction(this, "Ended", "Year"); };
+	infoDurationStartAMPM.onclick = function() { updateContraction(this, "Start", "AMPM"); };
+	infoDurationStartSecond.onclick = function() { updateContraction(this, "Start", "Second"); };
+	infoDurationStartMinute.onclick = function() { updateContraction(this, "Start", "Minute"); };
+	infoDurationStartHour.onclick = function() { updateContraction(this, "Start", "Hour"); };
+	infoDurationStartDay.onclick = function() { updateContraction(this, "Start", "Day"); };
+	infoDurationStartMonth.onclick = function() { updateContraction(this, "Start", "Month"); };
+	infoDurationStartYear.onclick = function() { updateContraction(this, "Start", "Year"); };
+	infoDurationStrength.onclick = function() { updateContraction(this, null, "Strength"); };
+	infoDurationDurationHour.onclick = function() { updateContraction(this, "Duration", "Hour"); };
+	infoDurationDurationMinute.onclick = function() { updateContraction(this, "Duration", "Minute"); };
+	infoDurationDurationSecond.onclick = function() { updateContraction(this, "Duration", "Second"); };
 	//Init database
 	if(localStorage["contractionHistory"] == null /*#DEBUG START*/|| true /*#DEBUG END*/) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
@@ -158,19 +232,19 @@ function updateStartTimeWithDateTime() {
 	}
 	if(db.length >= 1) {
 		var lastContractionEnded = new Date(db[0].Start.getTime() + db[0].Duration);
-		lastContractionEndedTimeText = dateToTimeString(lastContractionEnded);
+		lastContractionEndedTimeText = dateToTimeString(lastContractionEnded, false);
 		lastContractionEndedDateText = dateToDateString(lastContractionEnded);
 	}
 	updateText(duration, "00:00:00");
 	updateText(frequency, lastFrequencyText);
 	updateText(startDurationDate, dateToDateString(new Date()));
-	updateText(startDurationTime, dateToTimeString(new Date()));
+	updateText(startDurationTime, dateToTimeString(new Date()), false);
 	updateText(endDurationTime, lastContractionEndedTimeText);
 	updateText(endDurationDate, lastContractionEndedDateText);
 	clearInterval(ptrStartTimerAsClock);
 	ptrStartTimerAsClock = setInterval(function() {
 		updateText(startDurationDate, dateToDateString(new Date()));
-		updateText(startDurationTime, dateToTimeString(new Date()));
+		updateText(startDurationTime, dateToTimeString(new Date()), false);
 	}, 1000);
 }
 function StartClock(){
@@ -181,7 +255,7 @@ function StartClock(){
 		programState = ProgramState.InContraction;
 		clearInterval(ptrStartTimerAsClock);
 		contractionStartTime = new Date();
-		updateText(startDurationTime, dateToTimeString(contractionStartTime));
+		updateText(startDurationTime, dateToTimeString(contractionStartTime, false));
 		updateText(startDurationDate, dateToDateString(contractionStartTime));
 		ptrContractionStart = setInterval(function() {
 			updateText(duration, getDuration(contractionStartTime, new Date()));
@@ -215,8 +289,8 @@ function selectStrengthBlur() {
 			storeContraction(contractionStartTime, possibleStopTime, selectStrength.value);
 			programState = ProgramState.NoAction;
 			updateText(textStart, "Start");
-			updateText(endDurationTime, dateToTimeString(possibleStopTime));
-			updateText(endDurationDate, dateToDateString(possibleStopTime));
+			updateText(endDurationTime, dateToTimeString(possibleStopTime, false));
+			updateText(endDurationDate, dateToDateString(possibleStopTime, false));
 			updateStartTimeWithDateTime();
 			break;
 	}
@@ -285,7 +359,7 @@ function updateHistory() {
 	updateText(averageDuration, avgDurationText);
 	updateText(averageFrequency, avgFrequencyText);
 	for(var i=0; i<db.length; i++) {
-		var div = contractionEventToHTML(db[i], ((i+1) < db.length) ? db[i+1].Start : null);
+		var div = contractionEventToHTML(db[i], ((i+1) < db.length) ? db[i+1].Start : null, i);
 		historyContainer.appendChild(div);
 	}
 }
@@ -304,7 +378,7 @@ function dateToDateString(d) {
 	var year = d.getFullYear();
 	return month + "/" + day + "/" + year;
 }
-function dateToTimeString(d) {
+function dateToTimeString(d, includeSeconds) {
 	var isPM = false;
 	var hour = (d.getHours()).toString();
 	isPM = (hour > 12);
@@ -318,7 +392,26 @@ function dateToTimeString(d) {
 	if(min.length == 1) {
 		min = "0" + min;
 	}
-	return hour + ":" + min + " " + (isPM ? "PM" : "AM");
+	var seconds = (d.getSeconds()).toString();
+	if(seconds.length == 1) {
+		seconds = "0" + seconds;
+	}
+	if(includeSeconds) {
+		return hour + ":" + min + "." + seconds + " " + (isPM ? "PM" : "AM");
+	} else {
+		return hour + ":" + min + " " + (isPM ? "PM" : "AM");
+	}
+}
+function timeStringToArray(d) {
+	var a = new Array();
+	d = d.split(":");
+	a.push(d[0]);
+	var d2 = d[1].split(".");
+	a.push(d2[0]);
+	var d3 = d2[1].split(" ");
+	a.push(d3[0]);
+	a.push(d3[1]);
+	return a;
 }
 function getDuration(startTime, endTime) {
 	var milliseconds = endTime.getTime() - startTime.getTime();
@@ -428,11 +521,68 @@ function selectInfoTab() {
 	rectButtonHistory.style.fill = "url(#linearGradientButtonFade)";
 	rectButtonInfo.style.fill = "url(#linearGradientButtonFadeActive)";
 	rectButtonInfo.classList.add("active");
+	repairCheckBoxUI();
 }
-function contractionEventToHTML(contractionEvent, lastStartTime) {
+function loadInfoItem(contractionEvent, index) {
+	editingDatabaseIndex = index;
+	var startDateData = dateToDateString(contractionEvent.Start).split("/");
+	var startTimeData = timeStringToArray(dateToTimeString(contractionEvent.Start, true));
+	var endedDate = new Date(contractionEvent.Start.getTime() + contractionEvent.Duration);
+	var endedDateData = dateToDateString(endedDate).split("/");
+	var endedTimeData = timeStringToArray(dateToTimeString(endedDate, true));
+	var durationData = millisecondsToDurationString(contractionEvent.Duration).split(":");
+	updateText(infoDurationStartAMPM, startTimeData[3]);
+	updateText(infoDurationStartSecond, startTimeData[2]);
+	updateText(infoDurationStartMinute, startTimeData[1]);
+	updateText(infoDurationStartHour, startTimeData[0]);
+	updateText(infoDurationStartDay, startDateData[1]);
+	updateText(infoDurationStartYear, startDateData[2]);
+	updateText(infoDurationStartMonth, startDateData[0]);
+	updateText(infoDurationEndedAMPM, endedTimeData[3]);
+	updateText(infoDurationEndedSecond, endedTimeData[2]);
+	updateText(infoDurationEndedMinute, endedTimeData[1]);
+	updateText(infoDurationEndedHour, endedTimeData[0]);
+	updateText(infoDurationEndedDay, endedDateData[1]);
+	updateText(infoDurationEndedYear, endedDateData[2]);
+	updateText(infoDurationEndedMonth, endedDateData[0]);
+	updateText(infoDurationStrength, contractionEvent.Strength);
+	updateText(infoDurationDurationHour, durationData[0]);
+	updateText(infoDurationDurationMinute, durationData[1]);
+	updateText(infoDurationDurationSecond, durationData[2]);
+	if(contractionEvent.NewStart) {
+		infoNewStopCheckBox.removeAttribute("display");
+	} else {
+		infoNewStopCheckBox.setAttribute("display", "none");
+	}
+	var hiddenTextItems = layerInfo.getElementsByClassName("textInfoEdit");
+	for(var i=0; i<hiddenTextItems.length; i++) {
+		hiddenTextItems[i].removeAttribute("display");
+	}
+	infoDurationStrength.removeAttribute("display");
+	infoDurationStartYear.removeAttribute("display");
+	infoDurationStartMonth.removeAttribute("display");
+	infoDurationStartDay.removeAttribute("display");
+	infoDurationStartHour.removeAttribute("display");
+	infoDurationStartMinute.removeAttribute("display");
+	infoDurationStartSecond.removeAttribute("display");
+	infoDurationStartAMPM.removeAttribute("display");
+	infoDurationEndedYear.removeAttribute("display");
+	infoDurationEndedMonth.removeAttribute("display");
+	infoDurationEndedDay.removeAttribute("display");
+	infoDurationEndedHour.removeAttribute("display");
+	infoDurationEndedMinute.removeAttribute("display");
+	infoDurationEndedSecond.removeAttribute("display");
+	infoDurationEndedAMPM.removeAttribute("display");
+	infoDurationDurationHour.removeAttribute("display");
+	infoDurationDurationMinute.removeAttribute("display");
+	infoDurationDurationSecond.removeAttribute("display");
+	infoNewStop.removeAttribute("display");
+	selectInfoTab();
+}
+function contractionEventToHTML(contractionEvent, lastStartTime, index) {
 	var endedDate = new Date((contractionEvent.Start).getTime() + contractionEvent.Duration);
-	var startDateString = dateToDateString(contractionEvent.Start) + " " + dateToTimeString(contractionEvent.Start);
-	var endedDateString = dateToDateString(endedDate) + " " + dateToTimeString(endedDate);
+	var startDateString = dateToDateString(contractionEvent.Start) + " " + dateToTimeString(contractionEvent.Start, true);
+	var endedDateString = dateToDateString(endedDate) + " " + dateToTimeString(endedDate, true);
 	var durationString = millisecondsToDurationString(contractionEvent.Duration);
 	var frequencyString = "N/A";
 	if(lastStartTime != null) {
@@ -450,6 +600,20 @@ function contractionEventToHTML(contractionEvent, lastStartTime) {
 	var tr3 = document.createElementNS(xhtmlNS,"tr");
 	var tr4 = document.createElementNS(xhtmlNS,"tr");
 	var td = document.createElementNS(xhtmlNS,"td");
+	var divInfo = document.createElementNS(xhtmlNS,"div");
+	divInfo.style.fontStyle = "italic";
+	divInfo.style.backgroundColor = "#0000FF";
+	divInfo.style.borderRadius = "10px";
+	divInfo.style.width = "20px";
+	divInfo.style.height = "20px";
+	divInfo.style.lineHeight = "20px";
+	divInfo.style.marginLeft = "auto";
+	divInfo.style.marginRight = "auto";
+	divInfo.style.fontFamily = "Century Schoolbook L";
+	divInfo.style.fontWeight = "bolder";
+	divInfo.style.textAlign = "center";
+	divInfo.innerHTML = "i";
+	divInfo.onclick = function() {loadInfoItem(contractionEvent, index);};
 	td.rowSpan = 2;
 	td.style.width = "20%";
 	td.innerHTML = contractionEvent.Strength;
@@ -462,6 +626,9 @@ function contractionEventToHTML(contractionEvent, lastStartTime) {
 	tr2.appendChild(td);
 	td = document.createElementNS(xhtmlNS,"td");
 	td.rowSpan = 2;
+	td.style.textAlign = "center";
+	td.style.verticalAlign = "top";
+	td.appendChild(divInfo);
 	tr3.appendChild(td);
 	td = document.createElementNS(xhtmlNS,"td");
 	td.innerHTML = "Start: " + startDateString;
@@ -475,4 +642,190 @@ function contractionEventToHTML(contractionEvent, lastStartTime) {
 	table.appendChild(tr4);
 	div.appendChild(table);
 	return div;
+}
+function updateContraction(elem, field, datePart) {
+	var originalValue = elem.getElementsByTagName("tspan")[0].textContent;
+	console.log(originalValue);
+	switch(datePart) {
+		case "Strength":
+			promptStrengthChange.value = originalValue;
+			promptStrengthChange.onblur = function() { setContraction(promptStrengthChange, null, datePart); };
+			promptStrengthChange.parentElement.removeAttribute("display");
+			promptStrengthChange.focus();
+			promptStrengthChange.parentElement.setAttribute("display", "none");
+			break;
+		case "AMPM":
+			promptAMPM.value = originalValue;
+			promptAMPM.onblur = function() { setContraction(promptAMPM, field, datePart); };
+			promptAMPM.parentElement.removeAttribute("display");
+			promptAMPM.focus();
+			promptAMPM.parentElement.setAttribute("display", "none");
+			break;
+		case "Second":
+			promptSecond.value = originalValue;
+			promptSecond.onblur = function() { setContraction(promptSecond, field, datePart); };
+			promptSecond.parentElement.removeAttribute("display");
+			promptSecond.focus();
+			promptSecond.parentElement.setAttribute("display", "none");
+			break;
+		case "Minute":
+			promptMinute.value = originalValue;
+			promptMinute.onblur = function() { setContraction(promptMinute, field, datePart); };
+			promptMinute.parentElement.removeAttribute("display");
+			promptMinute.focus();
+			promptMinute.parentElement.setAttribute("display", "none");
+			break;
+		case "Hour":
+			promptHour.value = originalValue;
+			promptHour.onblur = function() { setContraction(promptHour, field, datePart); };
+			promptHour.parentElement.removeAttribute("display");
+			promptHour.focus();
+			promptHour.parentElement.setAttribute("display", "none");
+			break;
+		case "Day":
+			promptDay.value = originalValue;
+			promptDay.onblur = function() { setContraction(promptDay, field, datePart); };
+			promptDay.parentElement.removeAttribute("display");
+			promptDay.focus();
+			promptDay.parentElement.setAttribute("display", "none");
+			break;
+		case "Month":
+			promptMonth.value = originalValue;
+			promptMonth.onblur = function() { setContraction(promptMonth, field, datePart); };
+			promptMonth.parentElement.removeAttribute("display");
+			promptMonth.focus();
+			promptMonth.parentElement.setAttribute("display", "none");
+			break;
+		case "Year":
+			promptYear.value = originalValue;
+			promptYear.onblur = function() { setContraction(promptYear, field, datePart); };
+			promptYear.parentElement.removeAttribute("display");
+			promptYear.focus();
+			promptYear.parentElement.setAttribute("display", "none");
+			break;
+	}
+}
+function setContraction(sender, field, datePart) {
+	sender.onblur = null;
+	var db = JSON.parse(localStorage["contractionHistory"], dateTimeReviver);
+	db = db.sort(sortContractions);
+	if(field == null && datePart == "Strength") {
+		db[editingDatabaseIndex].Strength = sender.value;
+	} else {
+		switch(field) {
+			case "Start":
+				var d = dateToDateString(db[editingDatabaseIndex].Start).split("/");
+				var t = timeStringToArray(dateToTimeString(db[editingDatabaseIndex].Start, true));
+				switch(datePart) {
+					case "Year":
+						d[2] = sender.value;
+						break;
+					case "Month":
+						d[0] = sender.value;
+						break;
+					case "Day":
+						d[1] = sender.value;
+						break;
+					case "Hour":
+						t[0] = sender.value;
+						break;
+					case "Minute":
+						t[1] = sender.value;
+						break;
+					case "Second":
+						t[2] = sender.value;
+						break;
+					case "AMPM":
+						t[3] = sender.value;
+						break;
+				}
+				d[0] = parseInt(d[0], 10) - 1;
+				if(t[3] == "PM") {
+					t[0] = parseInt(t[0], 10) + 12;
+				}
+				db[editingDatabaseIndex].Start = new Date(d[2],d[0],d[1],t[0],t[1],t[2]);
+				break;
+			case "Ended":
+				var dur = db[editingDatabaseIndex].Duration;
+				var endedDate = new Date(db[editingDatabaseIndex].Start.getTime() + dur);
+				var d = dateToDateString(endedDate).split("/");
+				var t = timeStringToArray(dateToTimeString(endedDate, true));
+				var newEndedDate = null;
+				switch(datePart) {
+					case "Year":
+						d[2] = sender.value;
+						break;
+					case "Month":
+						d[0] = sender.value;
+						break;
+					case "Day":
+						d[1] = sender.value;
+						break;
+					case "Hour":
+						t[0] = sender.value;
+						break;
+					case "Minute":
+						t[1] = sender.value;
+						break;
+					case "Second":
+						t[2] = sender.value;
+						break;
+					case "AMPM":
+						t[3] = sender.value;
+						break;
+				}
+				d[0] = parseInt(d[0], 10) - 1;
+				if(t[3] == "PM") {
+					t[0] = parseInt(t[0], 10) + 12;
+				}
+				newEndedDate = new Date(d[2],d[0],d[1],t[0],t[1],t[2]);
+				db[editingDatabaseIndex].Start = new Date(newEndedDate.getTime() - dur);
+				break;
+			case "Duration":
+				var durationData = millisecondsToDurationString(db[editingDatabaseIndex].Duration).split(":");
+				switch(datePart) {
+					case "Hour":
+						durationData[0] = sender.value;
+						if(parseInt(durationData[0], 10) == 12) {
+							durationData[0] = 0;
+						}
+						break;
+					case "Minute":
+						durationData[1] = sender.value;
+						break;
+					case "Second":
+						durationData[2] = sender.value;
+						break;
+				}
+				db[editingDatabaseIndex].Duration = (parseInt(durationData[0],10) * 3600000) + (parseInt(durationData[1],10) * 60000) + (parseInt(durationData[2],10) * 1000);
+				break;
+		}
+	}
+	localStorage["contractionHistory"] = JSON.stringify(db);
+	loadInfoItem(db[editingDatabaseIndex], editingDatabaseIndex);
+	updateHistory();
+}
+function toggleCheckBox(checkBox) {
+	if(checkBox.hasAttribute("display")) {
+		checkBox.removeAttribute("display");
+		repairCheckBoxUI();
+	} else {
+		checkBox.setAttribute("display", "none");
+	}
+}
+function repairCheckBoxUI() {
+	//Repair UI.. cannot set height as percentage of width?
+	var checkBoxCount = document.getElementsByClassName("rectCheckBox").length;
+	for(var i=0; i<checkBoxCount; i++) {
+		try {
+			var w = document.getElementsByClassName("rectCheckBox")[i].getBBox().width;
+			document.getElementsByClassName("rectCheckBox")[i].setAttribute("height", w);
+		} catch(ex) {
+		}
+		try {
+			var w = document.getElementsByClassName("rectCheckBoxFill")[i].getBBox().width;
+			document.getElementsByClassName("rectCheckBoxFill")[i].setAttribute("height", w);
+		} catch(ex) {
+		}
+	}
 }

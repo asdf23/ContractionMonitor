@@ -245,7 +245,11 @@ function updateStartTimeWithDateTime() {
 	var lastContractionEndedTimeText = "";
 	var lastContractionEndedDateText = "";
 	if(db.length >= 2) {
-		lastFrequencyText = millisecondsToDurationString( db[0].Start.getTime() - db[1].Start.getTime() );
+		if( !db[0].NewStart ) {
+			lastFrequencyText = millisecondsToDurationString( db[0].Start.getTime() - db[1].Start.getTime() );
+		} else {
+			lastFrequencyText = "00:00:00";
+		}
 	}
 	if(db.length >= 1) {
 		var lastContractionEnded = new Date(db[0].Start.getTime() + db[0].Duration);
@@ -346,9 +350,11 @@ function updateHistory() {
 		oldDiv = historyContainer.getElementsByTagName("div");
 	}
 	if(db.length >= 2) {
-		if(!db[0].NewStart && !db[1].NewStart) {
+		if(!db[0].NewStart) {
 			var freqText = getDuration(db[1].Start, db[0].Start);
 			updateText(frequency, freqText);
+		} else {
+			updateText(frequency, "00:00:00");
 		}
 	}
 	var durationDivisor = 0;

@@ -1,6 +1,6 @@
 { 
 	 "name": "Contraction Monitor"
-	,"description": "This app records contractions and tells you when to go to the hospital"
+	,"description": "This app records contractions and tells you when to go to the hospital. A word of caution: This should be taken as advise and you should probably make this decision on your own or with your doctor."
 	,"launch_path": "/index.svg"
 	,"developer": { 
 		 "name": "Andrew Mainland"

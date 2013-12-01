@@ -19,6 +19,7 @@
 	 sodipodi:docname="index.svg"
 	 onload="init(this)">
 	<svg:script xlink:href="scripts/master.js" />
+	<svg:script xlink:href="scripts/medicalBusinessLogic.js" />
 	<defs
 		 id="defs4">
 		<!-- good looking button attempt -->

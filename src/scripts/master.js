@@ -175,35 +175,6 @@ function init(svgElem) {
 	//Init database
 	if(localStorage["contractionHistory"] == null /*#DEBUG START*/|| true /*#DEBUG END*/) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
-		//#DEBUG START
-		localStorage["contractionHistory"] = JSON.stringify([{
-			 Start: "2013-11-26T00:00:00.000Z"
-			,Duration: (1000 * 60 * 2)
-			,Strength: "regular"
-			,NewStart: true
-			,Note: "a note"
-		},{
-			 Start: "2013-11-26T01:00:00.000Z"
-			,Duration: (1000 * 60 * 2)
-			,Strength: "mild"
-			,NewStart: false
-			,Note: ""
-		},{
-			 Start: "2013-11-26T02:00:00.000Z"
-			,Duration: (1000 * 60 * 2)
-			,Strength: "mild"
-			,NewStart: false
-			,Note: ""
-		},{
-			 Start: "2013-11-24T02:00:00.000Z"
-			,Duration: (1000 * 60 * 5)
-			,Strength: "mild"
-			,NewStart: true
-			,Note: ""
-		}]);
-		console.log("will update history");
-		updateHistory();
-		//#DEBUG END
 	} else {
 		updateHistory();
 	}
@@ -386,6 +357,11 @@ function updateHistory() {
 	for(var i=0; i<db.length; i++) {
 		var div = contractionEventToHTML(db[i], ((i+1) < db.length) ? db[i+1].Start : null, i);
 		historyContainer.appendChild(div);
+	}
+	//TODO: we may want to add a remove Nag feature here
+	var result = checkDatabaseForAlert(db);
+	if( result.Alert ) {
+		alert(result.Message);
 	}
 }
 function sortContractions(a,b) {

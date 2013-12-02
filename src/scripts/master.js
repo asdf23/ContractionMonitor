@@ -173,7 +173,7 @@ function init(svgElem) {
 	timerNotepadIcon.onclick = function() { showTextarea(timerNotepadIcon, "New", promptTimerNote); };
 	infoNotepadIcon.onclick = function() { showTextarea(infoNotepadIcon, "Edit", promptInfoNote); };
 	//Init database
-	if(localStorage["contractionHistory"] == null /*#DEBUG START*/|| true /*#DEBUG END*/) {
+	if(localStorage["contractionHistory"] == null) {
 		localStorage["contractionHistory"] = JSON.stringify([]);
 	} else {
 		updateHistory();
